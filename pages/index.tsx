@@ -1,13 +1,10 @@
-import type { NextPage } from 'next'
-import {Spacer} from "@nextui-org/react";
+import type {NextPage} from 'next'
 
 const Home: NextPage = () => {
   return (
     <div>
-      <h1>Prueba las inteligencias artificiales</h1>
-      <p>asd</p>
-      <Spacer y={1}/>
-      <p>asd</p>
+      <h2>Título de ejemplo</h2>
+      <p>Descripción de ejemplo</p>
     </div>
   )
 }
