@@ -8,9 +8,10 @@ function ExplainTopicTool() {
   const [topic, setTopic] = useState("");
   const [explanation, setExplanation] = useState("");
 
-  const handleOnClick = () => {
-    // TODO: fetch to the api to get the explanation
-    setExplanation(topic); // for now, the explanation is the same as the topic
+  const handleOnClick = async () => {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "tools/explain-topic?topic=" + topic)
+    const data = await res.json();
+    setExplanation(data.explanation);
   }
 
   let toolData = {
