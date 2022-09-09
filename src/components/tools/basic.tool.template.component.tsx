@@ -1,9 +1,11 @@
-import { Button, Card, Container, Input, Spacer, Textarea } from "@nextui-org/react";
+import { Button, Card, Container, Input, Spacer, Textarea, Avatar, Text } from "@nextui-org/react";
 
 type ToolData = {
   tool: {
     name: string,
     description: string,
+    color?: "default" | "primary" | "secondary" | "success" | "warning" | "error" | "gradient",
+    icon?: string,
   }
   input: {
     label: string,
@@ -27,13 +29,18 @@ type ToolData = {
 function BasicToolTemplate({ toolData }: any) {
   const { tool, input, output, action } = toolData;
 
+  const colorList = ["primary", "secondary", "success", "warning", "error", "gradient"];
+  const headerColor = tool.color ?? colorList[Math.floor(Math.random() * colorList.length)];
+
   return (
     <Card
       variant="bordered"
       borderWeight="bold"
       css={{ mw: "350px", backgroundColor: "$gray100", }}>
-      <Card.Header css={{ paddingBottom: 0 }}>
-        <h4>{tool.name}</h4>
+      <Card.Header css={{ paddingTop: "8px", paddingBottom: "8px" }}>
+        <Avatar color={headerColor} squared/>
+        <Spacer x={0.5} />
+        <Text h4 css={{ marginBottom: 0}}>{tool.name}</Text>
       </Card.Header>
       <Card.Divider />
       <Card.Body css={{ paddingTop: "10px" }}>
