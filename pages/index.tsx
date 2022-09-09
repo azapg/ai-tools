@@ -1,21 +1,14 @@
-import { Grid } from '@nextui-org/react'
+import { Button, Text } from '@nextui-org/react'
 import type { NextPage } from 'next'
-import ExplainTopicTool from '../src/components/tools/explain.topic'
-import GrammarCorrectionTool from '../src/components/tools/grammar.correction'
+import Link from 'next/Link'
 
 const Home: NextPage = () => {
   return (
     <div>
-      <Grid.Container gap={2} justify="center">
-        <Grid xs >
-          <ExplainTopicTool />
-        </Grid>
-        <Grid xs >
-          <GrammarCorrectionTool />
-        </Grid>
-      </Grid.Container>
-
-
+      <Text h2>Inteligencia artificial</Text>
+      <Text>Prueba las inteligencias artificiales</Text>
+      <Link href="herramientas"><Button>Ver herramientas</Button></Link>
+      <Button bordered color="gradient">Revivir genios</Button>
     </div>
   )
 }
