@@ -49,12 +49,12 @@ function Navigation() {
             css={{ textGradient: "45deg, $blue600 -20%, $pink600 50%", padding: 0, margin: 0 }}>
             <Grid xs>
               <Avatar size="sm" squared bordered color="success" src={geniusesAvatars[avatarIndex]} />
-              <Spacer x={0.5} />
+              <Spacer x={0.3} />
             </Grid>
             <Text b>Genios</Text>
           </Navbar.Link>
         </NextLink>
-        <NavbarLink href="/recursos" text="Recursos" />
+        {/* <NavbarLink href="/recursos" text="Recursos" /> */}
       </Navbar.Content>
       <Navbar.Content />
     </Navbar >

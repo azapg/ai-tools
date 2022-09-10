@@ -36,11 +36,11 @@ function BasicToolTemplate({ toolData }: any) {
     <Card
       variant="bordered"
       borderWeight="bold"
-      css={{ mw: "350px", backgroundColor: "$gray100", }}>
+      css={{ mw: "350px", backgroundColor: "$gray100" }}>
       <Card.Header css={{ paddingTop: "8px", paddingBottom: "8px" }}>
-        <Avatar color={headerColor} squared/>
+        <Avatar color={headerColor} squared />
         <Spacer x={0.5} />
-        <Text h4 css={{ marginBottom: 0}}>{tool.name}</Text>
+        <Text h4 css={{ marginBottom: 0 }}>{tool.name}</Text>
       </Card.Header>
       <Card.Divider />
       <Card.Body css={{ paddingTop: "10px" }}>
