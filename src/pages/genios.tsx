@@ -1,5 +1,5 @@
 import { Spacer, Text } from '@nextui-org/react';
-import PlatoChat from '../src/components/geniuses/plato.chat.component';
+import PlatoChat from '../components/geniuses/plato.chat.component';
 
 function GeniusesPage() {
   return (

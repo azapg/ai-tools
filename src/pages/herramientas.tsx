@@ -1,6 +1,6 @@
 import { Container, Grid, Text } from "@nextui-org/react";
-import ExplainTopicTool from "../src/components/tools/explain.topic";
-import GrammarCorrectionTool from "../src/components/tools/grammar.correction";
+import ExplainTopicTool from "../components/tools/explain.topic";
+import GrammarCorrectionTool from "../components/tools/grammar.correction";
 
 function ToolsPage() {
   return (

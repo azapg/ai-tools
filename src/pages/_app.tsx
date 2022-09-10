@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import { NextUIProvider, createTheme } from '@nextui-org/react';
-import Layout from "../src/components/layout/layout.component";
+import Layout from "../components/layout/layout.component";
 
 const darkTheme = createTheme({ type: 'dark' });
 
