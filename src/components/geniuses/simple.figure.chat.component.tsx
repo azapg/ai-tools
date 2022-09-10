@@ -15,7 +15,7 @@ import ArrowDownIcon from "../icons/arrow.down.icon";
 
 /**
  *
- * @param with The genius to talk with (e.g. 'plato')
+ * @param with The genius to talk with (e.g. 'einstein')
  * @returns
  */
 
@@ -36,7 +36,7 @@ function FigureTalk(props: { with: string }) {
   const handleSend = async () => {
     if (input.length === 0) return;
     setIsLoading(true);
-    const response = "change this";
+    const response = await Geniuses.select(currentFigure.key).ask(input);
     setFigureResponse(response);
     setIsLoading(false);
   };
@@ -49,11 +49,11 @@ function FigureTalk(props: { with: string }) {
   };
 
   return (
-    <Card variant="bordered" css={{ backgroundColor: "$black" }}>
+    <Card variant="bordered" css={{ backgroundColor: "$black", position: "block"}}>
       <Dropdown disableAnimation disableTriggerPressedAnimation placement="bottom-left">
         <Dropdown.Trigger>
           <Card.Header
-            css={{ display: "flex", justifyContent: "space-around" }}
+            css={{ display: "flex", justifyContent: "space-around", position: "block" }}
           >
             <Figure {...currentFigure} />
             <ArrowDownIcon />

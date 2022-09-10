@@ -1,3 +1,5 @@
+import { GeniusKey } from "../../lib/geniuses";
+
 const modelList = [
   {
     label: 'Científicos',
@@ -8,14 +10,12 @@ const modelList = [
         name: 'Albert Einstein',
         avatar: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Albert-einstein-profile-picture-512x512.png.cf.png',
         description: 'Físico alemán',
-        category: "Científicos"
       },
       {
         key: 'tesla',
         name: 'Nikola Tesla',
         avatar: 'https://upload.wikimedia.org/wikipedia/commons/7/79/Tesla_circa_1890.jpeg',
         description: 'Inventor serbio',
-        category: "Científicos"
       },
     ],
   },
@@ -29,7 +29,7 @@ const modelList = [
         avatar: 'http://d5wt70d4gnm1t.cloudfront.net/media/a-s/articles/2817-368649535256/attack-of-the-clones-how-much-is-a-30000-reproduction-of-a-van-gogh-really-worth-512x512-c.jpg',
         description: 'Pintor holandés',
       }
-      ]
+    ]
   },
   {
     label: 'Filósofos',
@@ -43,6 +43,15 @@ const modelList = [
       }
     ]
   }
-];
+] as { 
+  label: string,
+  key: string,
+  figures: { 
+    key: GeniusKey,
+    name: string,
+    avatar: string,
+    description: string,
+  }[] 
+}[];
 
 export default modelList;
