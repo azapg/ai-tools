@@ -11,7 +11,7 @@ function Layout(props: any) {
         {/* footer */}
         <Container display="flex" justify="center" alignItems="center">
           <Spacer y={2} />
-          <Text small color="$gray800" css={{textAlign:"center"}}>Hecho con 💖 por Allan, para la feria de tecnología 16/09/2022</Text>
+          <Text small color="$gray800" css={{textAlign:"center"}}>Hecho con 💖 por Allan Zapata, para la feria de tecnología 16/09/2022</Text>
           <Spacer y={2} />
         </Container>
       </Container>
