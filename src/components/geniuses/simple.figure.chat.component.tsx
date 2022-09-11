@@ -13,12 +13,6 @@ import dropdownItems from "./models";
 import Figure from "./figure.component";
 import ArrowDownIcon from "../icons/arrow.down.icon";
 
-/**
- *
- * @param with The genius to talk with (e.g. 'einstein')
- * @returns
- */
-
 function FigureTalk(props: { with: string }) {
   const withFigure =
     dropdownItems
@@ -49,7 +43,7 @@ function FigureTalk(props: { with: string }) {
   };
 
   return (
-    <Card variant="bordered" css={{ backgroundColor: "$black", position: "block"}}>
+    <Card variant="bordered" css={{ backgroundColor: "$black", position: "block", maxWidth: "430px"}}>
       <Dropdown disableAnimation disableTriggerPressedAnimation placement="bottom-left">
         <Dropdown.Trigger>
           <Card.Header
