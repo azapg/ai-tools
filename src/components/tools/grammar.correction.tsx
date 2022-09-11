@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import BasicToolTemplate from "./basic.tool.template.component";
+import * as ToolsApi from "../../lib/tools";
+import Tools from "../../tools/tools";
 
 function GrammarCorrectionTool() {
   const [text, setText] = useState("");
   const [correction, setCorrection] = useState("");
 
-  const handleOnClick = () => {
-    setCorrection(text);
+  const handleOnClick = async () => {
+    const response = await ToolsApi.select(Tools.GRAMMAR_CORRECTION, {
+      input: text,
+    }).prompt();
+    setCorrection(response);
   }
 
   let toolData = {

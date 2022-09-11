@@ -20,6 +20,7 @@ type ToolData = {
   action: {
     text: string,
     onClick: () => void
+    isLoading?: boolean
   }
 }
 
@@ -28,7 +29,6 @@ type ToolData = {
  */
 function BasicToolTemplate({ toolData }: any) {
   const { tool, input, output, action } = toolData;
-
   const colorList = ["primary", "secondary", "success", "warning", "error", "gradient"];
   const headerColor = tool.color ?? colorList[Math.floor(Math.random() * colorList.length)];
 
@@ -36,7 +36,7 @@ function BasicToolTemplate({ toolData }: any) {
     <Card
       variant="bordered"
       borderWeight="bold"
-      css={{ mw: "350px", backgroundColor: "$gray100" }}>
+      css={{ mw: "350px", backgroundColor: "$black" }}>
       <Card.Header css={{ paddingTop: "8px", paddingBottom: "8px" }}>
         <Avatar color={headerColor} squared />
         <Spacer x={0.5} />
@@ -59,7 +59,7 @@ function BasicToolTemplate({ toolData }: any) {
       </Card.Body>
       <Card.Divider />
       <Card.Footer>
-        <Button onClick={action.onClick} css={{ width: "100%" }}>{action.text}</Button>
+        <Button onPress={action.onClick} css={{ width: "100%" }} disabled={action.isLoading} >{action.text}</Button>
       </Card.Footer>
     </Card>
   )
