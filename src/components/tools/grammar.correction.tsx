@@ -6,12 +6,13 @@ import Tools from "../../tools/tools";
 function GrammarCorrectionTool() {
   const [text, setText] = useState("");
   const [correction, setCorrection] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnClick = async () => {
-    const response = await ToolsApi.select(Tools.GRAMMAR_CORRECTION, {
-      input: text,
-    }).prompt();
+    setIsLoading(true);
+    const response = await ToolsApi.promptWith(Tools.GRAMMAR_CORRECTION, { input: text });
     setCorrection(response);
+    setIsLoading(false);
   }
 
   let toolData = {
@@ -31,7 +32,8 @@ function GrammarCorrectionTool() {
     },
     action: {
       text: "Corregir",
-      onClick: handleOnClick
+      onClick: handleOnClick,
+      isLoading
     },
   }
 
