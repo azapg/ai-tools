@@ -34,7 +34,7 @@ function Navigation() {
       setAvatarIndex((prevIndex) => (prevIndex + 1) % geniusesAvatars.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [geniusesAvatars.length]);
 
   return (
     <Navbar isBordered isCompact variant="floating">

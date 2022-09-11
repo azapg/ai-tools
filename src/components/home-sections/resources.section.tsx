@@ -1,6 +1,9 @@
 import {Button, Container, Grid, Spacer, Text} from "@nextui-org/react";
+import { useRouter } from "next/router";
 
 function ResourcesSection() {
+  const router = useRouter();
+
   return (<Container css={{padding: 0}}>
     <Container direction="column" css={{padding: 0}}>
       <Text h1 css={{lineHeight: "50px"}}>Recursos para aprender Inteligencia Artificial</Text>
@@ -22,5 +25,4 @@ function ResourcesSection() {
     </Grid.Container>
   </Container>)
 }
-
 export default ResourcesSection;

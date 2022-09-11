@@ -46,25 +46,25 @@ function ToolsSection() {
       <Grid.Container gap={2} justify="center">
         <Grid xs={12} sm={6} md={4} lg={3}>
           <ToolShowcase
-            name="Correción ortográfica"
+            name="Robot responde preguntas"
             categories={["Editar texto", "Español"]}
-            description="Corrige textos del español"
+            description="Un robot con todo el conocimiento de internet respondiendo CUALQUIER pregunta que le hagas :)"
             icon="no"
           />
           </Grid>
         <Grid xs={12} sm={6} md={4} lg={3}>
           <ToolShowcase
-            name="Correción ortográfica"
-            categories={["Editar texto", "Español"]}
-            description="Corrige textos del español"
+            name="Explicación sencilla"
+            categories={["Generar texto", "Aprender"]}
+            description="Generar una explicación sencilla, con ejemplos y analogías de un tema."
             icon="no"
           />
         </Grid>
         <Grid xs={12} sm={6} md={4} lg={3}>
           <ToolShowcase
-            name="Correción ortográfica"
-            categories={["Editar texto", "Español"]}
-            description="Corrige textos del español"
+            name="Generar preguntas"
+            categories={["Generar texto", "Profesores"]}
+            description="Generar preguntas sobre un tema específico puede servir a profesores para generar preguntas interesantes en sus ejercicios."
             icon="no"
           />
         </Grid>
