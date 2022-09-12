@@ -1,7 +1,9 @@
 import {Avatar, Button, Card, Container, Grid, Spacer, Text} from "@nextui-org/react";
 import {useRouter} from "next/router";
 
-function ToolShowcase(props: { name: string; description: string; icon: string; categories: string[] }) {
+function ToolShowcase(props: { name: string; description: string; icon: string; categories: string[], href: string }) {
+  const router = useRouter();
+
   return (
     <Card css={{padding: 0, backgroundColor: "$black", maxWidth: "20rem"}} variant="bordered">
       <Card.Header>
@@ -20,7 +22,7 @@ function ToolShowcase(props: { name: string; description: string; icon: string; 
       </Card.Body>
       {/*<Card.Divider/>*/}
       <Card.Footer css={{paddingTop: 0}}>
-        <Button css={{width: "100%"}}>Probar</Button>
+        <Button css={{width: "100%"}} onPress={() => router.push(props.href)}>Probar</Button>
       </Card.Footer>
     </Card>
   )
@@ -48,8 +50,9 @@ function ToolsSection() {
           <ToolShowcase
             name="Robot responde preguntas"
             categories={["Editar texto", "Español"]}
-            description="Un robot con todo el conocimiento de internet respondiendo CUALQUIER pregunta que le hagas :)"
+            description="Un robot con todo el conocimiento de internet respondiendo cualquier pregunta que le hagas."
             icon="no"
+            href="/herramientas#tool-4"
           />
           </Grid>
         <Grid xs={12} sm={6} md={4} lg={3}>
@@ -58,6 +61,7 @@ function ToolsSection() {
             categories={["Generar texto", "Aprender"]}
             description="Generar una explicación sencilla, con ejemplos y analogías de un tema."
             icon="no"
+            href="/herramientas#tool-0"
           />
         </Grid>
         <Grid xs={12} sm={6} md={4} lg={3}>
@@ -66,6 +70,7 @@ function ToolsSection() {
             categories={["Generar texto", "Profesores"]}
             description="Generar preguntas sobre un tema específico puede servir a profesores para generar preguntas interesantes en sus ejercicios."
             icon="no"
+            href="/herramientas#tool-2"
           />
         </Grid>
       </Grid.Container>

@@ -15,10 +15,10 @@ import ArrowDownIcon from "../icons/arrow.down.icon";
 
 function FigureTalk(props: { with: string }) {
   const withFigure =
-    dropdownItems
-      .flatMap((item) => item.figures)
-      .find((figure) => figure.key === props.with) ??
-    dropdownItems[0].figures[0];
+      dropdownItems
+          .flatMap((item) => item.figures)
+          .find((figure) => figure.key === props.with) ??
+      dropdownItems[0].figures[0];
 
   const [input, setInput] = useState("");
   const [figureResponse, setFigureResponse] = useState("");
@@ -43,65 +43,65 @@ function FigureTalk(props: { with: string }) {
   };
 
   return (
-    <Card variant="bordered" css={{ backgroundColor: "$black", position: "block", maxWidth: "430px"}}>
-      <Dropdown disableAnimation disableTriggerPressedAnimation placement="bottom-left">
-        <Dropdown.Trigger>
-          <Card.Header
-            css={{ display: "flex", justifyContent: "space-around", position: "block" }}
+      <Card variant="bordered" css={{ backgroundColor: "$black", position: "block", maxWidth: "430px"}}>
+        <Dropdown disableAnimation disableTriggerPressedAnimation placement="bottom-left">
+          <Dropdown.Trigger>
+            <Card.Header
+                css={{ display: "flex", justifyContent: "space-around", position: "block" }}
+            >
+              <Figure {...currentFigure} />
+              <ArrowDownIcon />
+            </Card.Header>
+          </Dropdown.Trigger>
+
+          <Dropdown.Menu onAction={(selected) => handleSelectFigure(selected as string)}>
+            {dropdownItems.map((section) => (
+                <Dropdown.Section key={section.key} title={section.label}>
+                  {section.figures.map((figure) => (
+                      <Dropdown.Item
+                          key={figure.key}
+                          title={figure.name}
+                          description={figure.description}
+                          icon={<Avatar squared src={figure.avatar} />}
+                      >{figure.name}</Dropdown.Item>
+                  ))}
+                </Dropdown.Section>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Card.Divider />
+        <Card.Body>
+          <Input
+              bordered
+              placeholder={`Escribe un mensaje para ${currentFigure.name}`}
+              label="Mensaje"
+              width="100%"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              type="search"
+          />
+          <Spacer y={0.5} />
+          <Textarea
+              readOnly
+              label={`Respuesta de ${currentFigure.name}`}
+              width="100%"
+              value={figureResponse}
+          />
+        </Card.Body>
+
+        <Card.Footer>
+          <Button
+              size="sm"
+              color="gradient"
+              css={{ width: "100%" }}
+              onPress={handleSend}
+              disabled={isLoading}
           >
-            <Figure {...currentFigure} />
-            <ArrowDownIcon />
-          </Card.Header>
-        </Dropdown.Trigger>
-
-        <Dropdown.Menu onAction={(selected) => handleSelectFigure(selected as string)}>
-          {dropdownItems.map((section) => (
-            <Dropdown.Section key={section.key} title={section.label}>
-              {section.figures.map((figure) => (
-                <Dropdown.Item
-                  key={figure.key}
-                  title={figure.name}
-                  description={figure.description}
-                  icon={<Avatar squared src={figure.avatar} />}
-                >{figure.name}</Dropdown.Item>
-              ))}
-            </Dropdown.Section>
-          ))}
-        </Dropdown.Menu>
-      </Dropdown>
-
-      <Card.Divider />
-      <Card.Body>
-        <Input
-          bordered
-          placeholder={`Escribe un mensaje para ${currentFigure.name}`}
-          label="Mensaje"
-          width="100%"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <Spacer y={0.5} />
-        <Textarea
-          readOnly
-          label={`Respuesta de ${currentFigure.name}`}
-          width="100%"
-          value={figureResponse}
-        />
-      </Card.Body>
-
-      <Card.Footer>
-        <Button
-          size="sm"
-          color="gradient"
-          css={{ width: "100%" }}
-          onPress={handleSend}
-          disabled={isLoading}
-        >
-          Enviar
-        </Button>
-      </Card.Footer>
-    </Card>
+            Enviar
+          </Button>
+        </Card.Footer>
+      </Card>
   );
 }
-
 export default FigureTalk;

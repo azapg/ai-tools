@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import BasicToolTemplate from "./basic.tool.template.component";
 import * as ToolsApi from "../../lib/tools";
 import Tools from "../../tools/tools";
@@ -15,7 +15,6 @@ function ExplainTopicTool() {
   const handleOnClick = async () => {
     setIsLoading(true);
     const explanation = await ToolsApi.promptWith(Tools.SIMPLE_EXPLANATION, { input: topic });
-    console.log(explanation);
     setExplanation(explanation);
     setIsLoading(false);
   }
@@ -42,7 +41,7 @@ function ExplainTopicTool() {
     },
   }
 
-  return <BasicToolTemplate toolData={toolData}/>
+  return <BasicToolTemplate {...toolData}/>
 }
 
 export default ExplainTopicTool;

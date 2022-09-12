@@ -37,7 +37,7 @@ function GrammarCorrectionTool() {
     },
   }
 
-  return <BasicToolTemplate toolData={toolData} />
+  return <BasicToolTemplate {...toolData} />
 }
 
 export default GrammarCorrectionTool;
