@@ -1,13 +1,5 @@
-import {
-  Avatar,
-  Button,
-  Card,
-  Dropdown,
-  Input,
-  Spacer,
-  Textarea,
-} from "@nextui-org/react";
-import { useState } from "react";
+import {Avatar, Button, Card, Container, Dropdown, Input, Loading, Spacer, Textarea} from "@nextui-org/react";
+import {useState} from "react";
 import * as Geniuses from "../../lib/geniuses";
 import dropdownItems from "./models";
 import Figure from "./figure.component";
@@ -43,65 +35,70 @@ function FigureTalk(props: { with: string }) {
   };
 
   return (
-      <Card variant="bordered" css={{ backgroundColor: "$black", position: "block", maxWidth: "430px"}}>
-        <Dropdown disableAnimation disableTriggerPressedAnimation placement="bottom-left">
-          <Dropdown.Trigger>
-            <Card.Header
-                css={{ display: "flex", justifyContent: "space-around", position: "block" }}
+      <Container css={{padding: 0, position: "relative"}}>
+        <Card variant="bordered" css={{backgroundColor: "$black", position: "relative", maxWidth: "430px"}}>
+          <Dropdown placement="bottom-left">
+            <Dropdown.Trigger>
+              <Card.Header>
+                <Figure {...currentFigure} />
+                <ArrowDownIcon/>
+              </Card.Header>
+            </Dropdown.Trigger>
+            <Dropdown.Menu
+                aria-label={"geniuses menu"}
+                onAction={(selected) => handleSelectFigure(selected as string)}
             >
-              <Figure {...currentFigure} />
-              <ArrowDownIcon />
-            </Card.Header>
-          </Dropdown.Trigger>
+              {dropdownItems.map((section) => (
+                  <Dropdown.Section key={section.key} title={section.label}>
+                    {section.figures.map((figure) => (
+                        <Dropdown.Item
+                            key={figure.key}
+                            title={figure.name}
+                            description={figure.description}
+                            icon={<Avatar squared src={figure.avatar}/>}
+                        >{figure.name}</Dropdown.Item>
+                    ))}
+                  </Dropdown.Section>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
 
-          <Dropdown.Menu onAction={(selected) => handleSelectFigure(selected as string)}>
-            {dropdownItems.map((section) => (
-                <Dropdown.Section key={section.key} title={section.label}>
-                  {section.figures.map((figure) => (
-                      <Dropdown.Item
-                          key={figure.key}
-                          title={figure.name}
-                          description={figure.description}
-                          icon={<Avatar squared src={figure.avatar} />}
-                      >{figure.name}</Dropdown.Item>
-                  ))}
-                </Dropdown.Section>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
+          <Card.Divider/>
+          <Card.Body>
+            <Input
+                bordered
+                placeholder={`Escribe un mensaje para ${currentFigure.name}`}
+                label="Mensaje"
+                width="100%"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                type="search"
+            />
+            <Spacer y={0.5}/>
+            <Textarea
+                readOnly
+                label={`Respuesta de ${currentFigure.name}`}
+                width="100%"
+                value={figureResponse}
+            />
+          </Card.Body>
 
-        <Card.Divider />
-        <Card.Body>
-          <Input
-              bordered
-              placeholder={`Escribe un mensaje para ${currentFigure.name}`}
-              label="Mensaje"
-              width="100%"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              type="search"
-          />
-          <Spacer y={0.5} />
-          <Textarea
-              readOnly
-              label={`Respuesta de ${currentFigure.name}`}
-              width="100%"
-              value={figureResponse}
-          />
-        </Card.Body>
-
-        <Card.Footer>
-          <Button
-              size="sm"
-              color="gradient"
-              css={{ width: "100%" }}
-              onPress={handleSend}
-              disabled={isLoading}
-          >
-            Enviar
-          </Button>
-        </Card.Footer>
-      </Card>
+          <Card.Footer>
+            <Button
+                size="sm"
+                color="gradient"
+                css={{width: "100%"}}
+                onPress={handleSend}
+                disabled={isLoading}
+            >
+              { isLoading ? (
+                  <Loading type="points-opacity" color="currentColor" size="sm"/>
+              ) : "Enviar" }
+            </Button>
+          </Card.Footer>
+        </Card>
+      </Container>
   );
 }
+
 export default FigureTalk;

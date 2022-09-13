@@ -3,11 +3,10 @@ import {useRouter} from "next/router";
 
 function ToolShowcase(props: { name: string; description: string; icon: string; categories: string[], href: string }) {
   const router = useRouter();
-
   return (
     <Card css={{padding: 0, backgroundColor: "$black", maxWidth: "20rem"}} variant="bordered">
       <Card.Header>
-        <Avatar color="success" squared/>
+        <Avatar squared/>
         <Spacer x={0.5}/>
         <Container direction="column" css={{padding: 0}}>
           <Text h5 css={{marginBottom: 0}}>

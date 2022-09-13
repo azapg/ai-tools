@@ -1,4 +1,4 @@
-import {Avatar, Button, Card, Container, Input, Spacer, Text, Textarea} from "@nextui-org/react";
+import {Avatar, Button, Card, Container, Input, Loading, Spacer, Text, Textarea} from "@nextui-org/react";
 import {useMemo} from "react";
 
 type ToolData = {
@@ -21,7 +21,7 @@ type ToolData = {
   action: {
     text: string,
     onClick: () => any
-    isLoading?: boolean
+    isLoading: boolean
   }
 }
 
@@ -59,11 +59,15 @@ function BasicToolTemplate(toolData: ToolData) {
             />
           </Container>
           <Spacer y={0.5}/>
-          <Textarea readOnly label={output.label} value={output.value}/>
+          <Textarea readOnly label={output.label} value={output.value} maxRows={6}/>
         </Card.Body>
         <Card.Divider/>
         <Card.Footer>
-          <Button onPress={action.onClick} css={{width: "100%"}} disabled={action.isLoading}>{action.text}</Button>
+          <Button onPress={action.onClick} css={{width: "100%"}} disabled={action.isLoading}>
+            { action.isLoading ? (
+                <Loading type="points-opacity" color="currentColor" size="sm"/>
+            ) : action.text }
+          </Button>
         </Card.Footer>
       </Card>
   )
