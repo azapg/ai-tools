@@ -1,5 +1,5 @@
 import {Avatar, Button, Card, Container, Dropdown, Input, Loading, Spacer, Textarea} from "@nextui-org/react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import * as Geniuses from "../../lib/geniuses";
 import dropdownItems from "./models";
 import Figure from "./figure.component";
@@ -16,8 +16,32 @@ function FigureTalk(props: { with: string }) {
   const [figureResponse, setFigureResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [currentFigure, setCurrentFigure] = useState(withFigure);
+  const [helper, setHelper] = useState({
+    text: "",
+    color: "primary",
+    active: false
+  } as {
+    text: string,
+    color: any | undefined,
+    active: boolean
+  });
+
+  const validate = () => {
+    return input;
+  }
+
+  useEffect(() => {
+    if (validate() && helper.active) {
+      setHelper({
+        text: "",
+        color: "",
+        active: false
+      })
+    }
+  }, [input, helper.active])
 
   const figureList = dropdownItems.flatMap((section) => section.figures);
+
 
   const handleSend = async () => {
     if (input.length === 0) return;
@@ -73,8 +97,10 @@ function FigureTalk(props: { with: string }) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 type="search"
+                helperText={helper.text}
+                helperColor={helper.color}
             />
-            <Spacer y={0.5}/>
+            <Spacer y={1}/>
             <Textarea
                 readOnly
                 label={`Respuesta de ${currentFigure.name}`}
@@ -88,7 +114,23 @@ function FigureTalk(props: { with: string }) {
                 size="sm"
                 color="gradient"
                 css={{width: "100%"}}
-                onPress={handleSend}
+                onPress={() => {
+                  if(!validate()) {
+                    setHelper({
+                      text: "Este campo no puede estar vacío",
+                      color: "error",
+                      active: true
+                    });
+                    return;
+                  }
+
+                  setHelper({
+                    text: "",
+                    color: "",
+                    active: false
+                  });
+                  handleSend().then();
+                }}
                 disabled={isLoading}
             >
               { isLoading ? (

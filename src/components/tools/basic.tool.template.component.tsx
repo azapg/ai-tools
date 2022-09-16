@@ -1,5 +1,5 @@
 import {Avatar, Button, Card, Container, Input, Loading, Spacer, Text, Textarea} from "@nextui-org/react";
-import {useMemo} from "react";
+import {useEffect, useMemo, useState} from "react";
 
 type ToolData = {
   tool: {
@@ -35,6 +35,30 @@ function BasicToolTemplate(toolData: ToolData) {
     return tool.color ?? colorList[Math.floor(Math.random() * colorList.length)]
   }, [tool.color]);
 
+  const [helper, setHelper] = useState({
+    text: "",
+    color: "primary",
+    active: false
+  } as {
+    text: string,
+    color: any | undefined,
+    active: boolean
+  });
+
+  const validate = () => {
+    return input.value;
+  }
+
+  useEffect(() => {
+    if (validate() && helper.active) {
+      setHelper({
+        text: "",
+        color: "",
+        active: false
+      })
+    }
+  }, [input.value, helper.active])
+
   return (
       <Card
           variant="bordered"
@@ -56,17 +80,35 @@ function BasicToolTemplate(toolData: ToolData) {
                 width="100%"
                 value={input.value}
                 onChange={input.onChange}
+                helperText={helper.text}
+                helperColor={helper.color}
             />
           </Container>
-          <Spacer y={0.5}/>
+          <Spacer y={1}/>
           <Textarea readOnly label={output.label} value={output.value} maxRows={6}/>
         </Card.Body>
         <Card.Divider/>
         <Card.Footer>
-          <Button onPress={action.onClick} css={{width: "100%"}} disabled={action.isLoading}>
-            { action.isLoading ? (
+          <Button onPress={() => {
+            if(!validate()) {
+              setHelper({
+                text: "Este campo no puede estar vacío",
+                color: "error",
+                active: true
+              });
+              return;
+            }
+
+            action.onClick();
+            setHelper({
+              text: "",
+              color: "",
+              active: false
+            })
+          }} css={{width: "100%"}} disabled={action.isLoading}>
+            {action.isLoading ? (
                 <Loading type="points-opacity" color="currentColor" size="sm"/>
-            ) : action.text }
+            ) : action.text}
           </Button>
         </Card.Footer>
       </Card>
