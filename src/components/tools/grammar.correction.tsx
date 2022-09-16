@@ -7,11 +7,13 @@ function GrammarCorrectionTool() {
   const [text, setText] = useState("");
   const [correction, setCorrection] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("" as string | undefined);
 
   const handleOnClick = async () => {
     setIsLoading(true);
     const response = await ToolsApi.promptWith(Tools.GRAMMAR_CORRECTION, { input: text });
-    setCorrection(response);
+    setCorrection(response.explanation);
+    setError(response.error);
     setIsLoading(false);
   }
 
@@ -28,7 +30,8 @@ function GrammarCorrectionTool() {
     },
     output: {
       label: "Corrección",
-      value: correction
+      value: correction,
+      error
     },
     action: {
       text: "Corregir",

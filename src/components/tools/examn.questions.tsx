@@ -7,11 +7,13 @@ function ExamnQuestionsTool() {
   const [topic, setTopic] = useState("");
   const [questions, setQuestions] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("" as string | undefined);
 
   const handleOnClick = async () => {
     setIsLoading(true);
     const response = await ToolsApi.promptWith(Tools.EXAMN_QUESTIONS, { topic });
-    setQuestions(response);
+    setQuestions(response.explanation);
+    setError(response.error);
     setIsLoading(false);
   }
 
@@ -28,7 +30,8 @@ function ExamnQuestionsTool() {
     },
     output: {
       label: "Preguntas",
-      value: questions
+      value: questions,
+      error
     },
     action: {
       text: "Generar",

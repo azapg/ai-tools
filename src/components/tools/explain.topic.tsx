@@ -10,12 +10,13 @@ function ExplainTopicTool() {
   const [topic, setTopic] = useState("");
   const [explanation, setExplanation] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const [error, setError] = useState("" as string | undefined);
 
   const handleOnClick = async () => {
     setIsLoading(true);
-    const explanation = await ToolsApi.promptWith(Tools.SIMPLE_EXPLANATION, { input: topic });
-    setExplanation(explanation);
+    const response = await ToolsApi.promptWith(Tools.SIMPLE_EXPLANATION, { input: topic });
+    setExplanation(response.explanation);
+    setError(response.error);
     setIsLoading(false);
   }
 
@@ -32,7 +33,8 @@ function ExplainTopicTool() {
     },
     output: {
       label: "Explicación",
-      value: explanation
+      value: explanation,
+      error
     },
     action: {
       text: "Explicar",

@@ -7,11 +7,13 @@ function AnsweringBotTool() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("" as string | undefined);
 
   const handleOnClick = async () => {
     setIsLoading(true);
     const response = await ToolsApi.promptWith(Tools.ANSWERING_BOT, { question });
-    setAnswer(response);
+    setAnswer(response.explanation);
+    setError(response.error);
     setIsLoading(false);
   }
 
@@ -28,7 +30,8 @@ function AnsweringBotTool() {
     },
     output: {
       label: "Respuesta",
-      value: answer
+      value: answer,
+      error
     },
     action: {
       text: "Preguntar",

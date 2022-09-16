@@ -16,7 +16,8 @@ type ToolData = {
   },
   output: {
     label: string,
-    value: string
+    value: string,
+    error?: string | undefined,
   },
   action: {
     text: string,
@@ -45,19 +46,19 @@ function BasicToolTemplate(toolData: ToolData) {
     active: boolean
   });
 
+  useEffect(() => {
+    if(output.error) {
+      setHelper({
+        text: output.error,
+        color: "error",
+        active: true
+      })
+    }
+  }, [output.error])
+
   const validate = () => {
     return input.value;
   }
-
-  useEffect(() => {
-    if (validate() && helper.active) {
-      setHelper({
-        text: "",
-        color: "",
-        active: false
-      })
-    }
-  }, [input.value, helper.active])
 
   return (
       <Card

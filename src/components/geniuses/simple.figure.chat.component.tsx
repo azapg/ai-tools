@@ -1,5 +1,5 @@
 import {Avatar, Button, Card, Container, Dropdown, Input, Loading, Spacer, Textarea} from "@nextui-org/react";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import * as Geniuses from "../../lib/geniuses";
 import dropdownItems from "./models";
 import Figure from "./figure.component";
@@ -30,23 +30,22 @@ function FigureTalk(props: { with: string }) {
     return input;
   }
 
-  useEffect(() => {
-    if (validate() && helper.active) {
-      setHelper({
-        text: "",
-        color: "",
-        active: false
-      })
-    }
-  }, [input, helper.active])
-
   const figureList = dropdownItems.flatMap((section) => section.figures);
 
 
   const handleSend = async () => {
     if (input.length === 0) return;
     setIsLoading(true);
-    const response = await Geniuses.select(currentFigure.key).ask(input);
+    const {response, error} = await Geniuses.select(currentFigure.key).ask(input);
+
+    if(error) {
+      setHelper({
+        text: error,
+        color: "error",
+        active: true
+      });
+    }
+
     setFigureResponse(response);
     setIsLoading(false);
   };

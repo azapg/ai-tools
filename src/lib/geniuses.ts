@@ -11,7 +11,7 @@ export enum GeniusKey {
   PLATO="plato",
 }
 
-export function select(genius: GeniusKey): { ask(prompt: string): Promise<string> } {
+export function select(genius: GeniusKey): { ask(prompt: string): Promise<{ response: string, error?: string }> } {
   class Genius {
     private _name: string;
     private _topics: string;
@@ -23,11 +23,11 @@ export function select(genius: GeniusKey): { ask(prompt: string): Promise<string
       this._model = model;
     }
 
-    ask(prompt: string): Promise<string> {
-      return new Promise<string>((resolve, reject) => {
+    ask(prompt: string): Promise<{ response: string, error?: string }> {
+      return new Promise<{ response: string, error?: string }>((resolve, reject) => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/geniuses/${this._name}?topics=${this._topics}&input=${prompt}&model=${this._model}`)
           .then(response => response.json())
-          .then(data => resolve(data.response))
+          .then(data => resolve(data))
           .catch(error => reject(error))
       })
     }

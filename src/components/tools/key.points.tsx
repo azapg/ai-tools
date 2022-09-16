@@ -7,11 +7,13 @@ function KeyPointsTool() {
   const [topic, setTopic] = useState("");
   const [points, setPoints] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("" as string | undefined);
 
   const handleOnClick = async () => {
     setIsLoading(true);
     const response = await ToolsApi.promptWith(Tools.KEY_POINTS, { topic });
-    setPoints(response);
+    setPoints(response.explanation);
+    setError(response.error);
     setIsLoading(false);
   }
 
@@ -28,7 +30,8 @@ function KeyPointsTool() {
     },
     output: {
       label: "Puntos clave",
-      value: points
+      value: points,
+      error
     },
     action: {
       text: "Generar",
