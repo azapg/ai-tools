@@ -60,7 +60,7 @@ function FigureTalk(props: { with: string }) {
   return (
       <Container css={{padding: 0, position: "relative"}}>
         <Card variant="bordered" css={{backgroundColor: "$black", position: "relative", maxWidth: "430px"}}>
-          <Dropdown placement="bottom-left">
+          <Dropdown placement="top-left">
             <Dropdown.Trigger>
               <Card.Header>
                 <Figure {...currentFigure} />
