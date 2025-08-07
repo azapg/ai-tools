@@ -57,7 +57,7 @@ function BasicToolTemplate(toolData: ToolData) {
   }, [output.error])
 
   const validate = () => {
-    return input.value;
+    return input.value.trim();
   }
 
   return (
@@ -93,7 +93,7 @@ function BasicToolTemplate(toolData: ToolData) {
           <Button onPress={() => {
             if(!validate()) {
               setHelper({
-                text: "Este campo no puede estar vacío",
+                text: "You must provide a message",
                 color: "error",
                 active: true
               });
